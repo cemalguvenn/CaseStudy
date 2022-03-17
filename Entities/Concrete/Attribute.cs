@@ -9,6 +9,6 @@ namespace Entities.Concrete
         public int AttributeId { get; set; }
         public string Name { get; set; }
         public string Value { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } = false;
     }
 }

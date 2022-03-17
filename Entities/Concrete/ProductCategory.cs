@@ -8,9 +8,8 @@ namespace Entities.Concrete
     {
         public int ProductCategoryId { get; set; }
         public string Name { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } = false;
 
-        public ICollection<Product> Products { get; set; }
         public ICollection<Attribute> Attributes { get; set; }
     }
 }

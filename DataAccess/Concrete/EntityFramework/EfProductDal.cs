@@ -50,13 +50,15 @@ namespace DataAccess.Concrete.EntityFramework
 
         public async Task<List<Product>> GetAll()
         {
-            return await _context.Products.ToListAsync();
+            return await _context.Products
+                .Where(p => p.IsDeleted == false)
+                .ToListAsync();
         }
 
         public async Task<List<Product>> GetByCategoryId(int categoryId)
         {
             var result = _context.Products
-                 .Where(x => x.ProductCategoryId == categoryId)
+                 .Where(x => x.ProductCategoryId == categoryId && x.IsDeleted == false)
                  .ToListAsync();
             return await result;
         }
@@ -71,7 +73,7 @@ namespace DataAccess.Concrete.EntityFramework
         public async Task<List<Product>> GetByPriceRange(int min, int max)
         {
             var result = _context.Products
-                .Where(x => x.Price >= min && x.Price <= max)
+                .Where(x => x.Price >= min && x.Price <= max && x.IsDeleted == false)
                 .ToListAsync();
             return await result;
         }

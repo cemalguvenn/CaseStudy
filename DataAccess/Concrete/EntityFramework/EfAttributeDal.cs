@@ -47,7 +47,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public async Task<List<Entities.Concrete.Attribute>> GetAll()
         {
-            var result = _context.Attributes.ToListAsync();
+            var result = _context.Attributes.Where(a => a.IsDeleted == false).ToListAsync();
             return await result;
         }
 

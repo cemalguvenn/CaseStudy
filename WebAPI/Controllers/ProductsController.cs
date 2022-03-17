@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -17,6 +18,18 @@ namespace WebAPI.Controllers
         public ProductsController(IProductService productService)
         {
             _productService = productService;
+        }
+
+        [HttpPost("add")]
+        public async Task<IActionResult> Add(Product product)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            await _productService.Add(product);
+            return Ok();
         }
 
 

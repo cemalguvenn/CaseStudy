@@ -3,6 +3,7 @@ using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
@@ -47,13 +48,14 @@ namespace DataAccess.Concrete.EntityFramework
 
         public async Task<List<ProductCategory>> GetAll()
         {
-            var result = _context.ProductCategories.ToListAsync();
+            var result = _context.ProductCategories.Where(p => p.IsDeleted == false).ToListAsync();
             return await result;
         }
 
         public async Task<ProductCategory> GetByName(string name)
         {
             var result = _context.ProductCategories
+                .Where(p => p.IsDeleted == false)
                 .FirstOrDefaultAsync(x => x.Name == name);
             return await result;
         }
